@@ -63,20 +63,24 @@ job("task6-job3") {
     upstream('task6-job3', 'SUCCESS')
   }
   steps {
-    shell('''
-if sudo kubectl get deployments webserver
+    shell('''if sudo kubectl get deployments webserver
 then
 echo "send to production"
 else
 echo "sending back to developer"
 exit 1
-fi
-''')
+fi''')
   }
   publishers {
     extendedEmail {
       contentType('text/html')
       triggers {
+        success{
+          attachBuildLog(true)
+          subject('Build successfull')
+          content('The build was successful and deployment was done.')
+          recipientList('ashish.dav99@gmail.com')
+        }
         failure{
           attachBuildLog(true)
           subject('Failed build')
@@ -90,6 +94,10 @@ fi
 
 
 
+
+
+
+
 buildPipelineView('project-A') {
   filterBuildQueue(true)
   filterExecutors(false)
@@ -98,5 +106,5 @@ buildPipelineView('project-A') {
   selectedJob('task6-job1')
   alwaysAllowManualTrigger(false)
   showPipelineParameters(true)
-  refreshFrequency(5)
+  refreshFrequency(1)
 }
