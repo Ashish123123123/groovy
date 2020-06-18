@@ -16,7 +16,7 @@ job("task6-job1") {
   steps {
     dockerBuildAndPublish {
       repositoryName('ashishkr99/httpd-server')
-      tag('${BUILD_NUMBER}')
+      tag(latest)
       dockerHostURI('tcp://0.0.0.0:1234')
       registryCredentials('docker-hub')
       createFingerprints(false)
@@ -43,7 +43,7 @@ then
 		sudo kubectl rollout restart deployment/webserver
 		sudo kubectl rollout status deployment/webserver
   else
-		sudo kubectl create deployment webserver --image=ashishkr99/httpd-server:\${BUILD_NUMBER}
+		sudo kubectl create deployment webserver --image=ashishkr99/httpd-server:latest
 		sudo kubectl scale deployment webserver --replicas=3
 		sudo kubectl expose deployment webserver --port 80 --type NodePort
 	fi
