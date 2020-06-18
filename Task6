@@ -43,7 +43,7 @@ then
 		sudo kubectl rollout restart deployment/webserver
 		sudo kubectl rollout status deployment/webserver
   else
-		sudo kubectl create deployment webserver --image=ashishkr99/httpd-server:${BUILD_NUMBER}
+		sudo kubectl create deployment webserver --image=ashishkr99/httpd-server:"${BUILD_NUMBER}"
 		sudo kubectl scale deployment webserver --replicas=3
 		sudo kubectl expose deployment webserver --port 80 --type NodePort
 	fi
