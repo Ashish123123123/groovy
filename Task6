@@ -16,7 +16,7 @@ job("task6-job1") {
   steps {
     dockerBuildAndPublish {
       repositoryName('ashishkr99/httpd-server')
-      tag(latest)
+      tag("latest")
       dockerHostURI('tcp://0.0.0.0:1234')
       registryCredentials('docker-hub')
       createFingerprints(false)
