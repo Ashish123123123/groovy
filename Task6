@@ -98,7 +98,7 @@ fi''')
 
 
 
-buildPipelineView('project-A') {
+buildPipelineView('TASK-6') {
   filterBuildQueue(true)
   filterExecutors(false)
   title('TASK-6')
